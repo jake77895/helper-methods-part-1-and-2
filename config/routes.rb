@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/movies/:id/edit" => "movies#edit"
 
   # DELETE
-  delete "/movies/:id" => "movies" => "destroy"
+  delete "/movies/:id" => "movies#destroy"
 
   #------------------------------
 end
