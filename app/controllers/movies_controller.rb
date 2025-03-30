@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   def new
-    @the_movie = Movie.new
+    @movie = Movie.new
 
   end
 
@@ -19,24 +19,20 @@ class MoviesController < ApplicationController
   end
 
   def show
-    the_id = params.fetch(:id)
-
-    matching_movies = Movie.where({ id: the_id })
-
-    @the_movie = matching_movies.first
+    @the_movie = Movie.find_by(id: params.fetch(:id))
 
   end
 
   def create
-    @the_movie = Movie.new
-    @the_movie.title = params.fetch("query_title")
-    @the_movie.description = params.fetch("query_description")
+    @movie = Movie.new
+    @movie.title = params.fetch(:title)
+    @movie.description = params.fetch(:description)
 
-    if @the_movie.valid?
-      @the_movie.save
+    if @movie.valid?
+      @movie.save
       redirect_to movies_url, notice: "Movie was successfully created."
     else
-      render template: "new"
+      render :new
     end
   end
 
